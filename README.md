@@ -1,1 +1,1 @@
-# buzz-khata-group
+# Buzz Khata Group
