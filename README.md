@@ -1,1 +1,1 @@
-# Buzz Khata Group
+# Buzz Khata People
