@@ -20,6 +20,7 @@
   "homepage": "https://github.com/mustanish/buzz-khata-people#readme",
   "dependencies": {
     "app-root-path": "^3.0.0",
+    "async": "^3.1.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "deep-freeze": "^0.0.1",
@@ -27,6 +28,8 @@
     "helmet": "^3.21.2",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
+    "pg": "^7.18.2",
+    "redis": "^3.0.2",
     "underscore": "^1.9.2",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"

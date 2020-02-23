@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV || 'development';
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const config = require('./configs/config');
+const config = require('./configs/startup');
 const winston = require('./utils/logger');
 
 const app = express();
@@ -20,6 +20,10 @@ app.use(helmet());
 app.get('/', function(req, res) {
   res.send('People Module Setup');
 });
+
+const group = require('./routes/group');
+
+app.use('/group', group);
 
 // catch 404 and forward to error handler
 app.use(function(_req, _res, next) {
