@@ -21,21 +21,18 @@ app.get('/', function(req, res) {
   res.send('People Module Setup');
 });
 
-const group = require('./routes/group');
+const routes = require('./routes');
 
-app.use('/group', group);
+app.use('/', routes);
 
-// catch 404 and forward to error handler
-app.use(function(_req, _res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+// 404
+app.use(function(req, res) {
+  res.status(404).send({ message: `Route${req.url} Not found.` });
 });
 
-// error handler
-app.use((err, _req, res) => {
-  res.status(err.status || 500);
-  res.json({ error: err.message });
+// Any server error
+app.use(function(err, req, res) {
+  res.status(500).send({ error: err });
 });
 
 const server = app.listen(global.config.port, () => {

@@ -1,5 +1,5 @@
-const { Pool } = require('pg');
+const { Client } = require('pg');
 
-const connectionString = 'postgres://postgres@localhost:5433/postgres';
-const pool = new Pool(connectionString);
-module.exports = { pool };
+const connectionString = `postgresql://yugabyte:yugabyte@localhost:5433/buzzkhata`;
+const client = new Client(connectionString);
+module.exports = client;

@@ -18,7 +18,7 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'func-names': ['error', 'never'],
     'linebreak-style': ['error', 'unix'],
-    'no-underscore-dangle': ['error', { allow: ['__meta', '__test_only__'] }],
+    'no-underscore-dangle': ['error', { allow: ['_original'] }],
     'no-unneeded-ternary': ['error'],
     'object-curly-spacing': ['error', 'always'],
     'prefer-destructuring': ['error'],

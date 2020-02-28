@@ -1,32 +1,28 @@
-const createGroup = () => {
-  // eslint-disable-next-line no-console
-  console.log('Create Group');
+/* eslint-disable spaced-comment */
+/*const code = require('http-status-codes');
+const connector = require('../configs/database');
+const Group = require('../models/group');
+const GROUP_CONSTANT = require('../constants/group');*/
+
+const create = () => {
+  console.log('INSIDE:', 'CREATE');
 };
 
-const updateGroup = () => {
-  // eslint-disable-next-line no-console
-  console.log('Update Group');
+const update = () => {
+  console.log('INSIDE:', 'UPDATE');
 };
 
-const deleteGroup = () => {
-  // eslint-disable-next-line no-console
-  console.log('Delete Group');
+/*const deleteGroup = async (req, res) => {
+  const data = await Group.delete();
+  console.log('data:', data);
 };
 
-const detail = () => {
-  // eslint-disable-next-line no-console
-  console.log('Group Detail');
-};
-
-const allGroups = () => {
-  // eslint-disable-next-line no-console
-  console.log('All Groups');
-};
+const detail = async (req, res) => {
+  const data = await Group.detail();
+  console.log('data:', data);
+};*/
 
 module.exports = {
-  createGroup,
-  updateGroup,
-  deleteGroup,
-  allGroups,
-  detail
+  create,
+  update
 };

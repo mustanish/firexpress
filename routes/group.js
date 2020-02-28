@@ -1,16 +1,11 @@
 const express = require('express');
-const groups = require('../controllers/group');
+const group = require('../controllers/group');
+const schemaValidator = require('../middlewares/schemaValidator');
 
 const router = express.Router();
 
-router.get('/:create', groups.createGroup);
+router.post('/group', schemaValidator(true), group.create);
 
-router.put('/:update', groups.updateGroup);
-
-router.put('/:delete', groups.deleteGroup);
-
-router.put('/:all', groups.allGroups);
-
-router.put('/:detail', groups.detail);
+router.put('/group/:id', schemaValidator(true), group.update);
 
 module.exports = router;
