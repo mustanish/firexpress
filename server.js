@@ -18,7 +18,7 @@ app.use(cors());
 app.use(helmet());
 
 app.get('/', function(req, res) {
-  res.send('People Module Setup');
+  res.send('People Module With Docker Setup ');
 });
 
 const routes = require('./routes');
@@ -26,12 +26,12 @@ const routes = require('./routes');
 app.use('/', routes);
 
 // 404
-app.use(function(req, res) {
+app.use((req, res) => {
   res.status(404).send({ message: `Route${req.url} Not found.` });
 });
 
 // Any server error
-app.use(function(err, req, res) {
+app.use((err, req, res) => {
   res.status(500).send({ error: err });
 });
 
