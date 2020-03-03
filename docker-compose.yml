@@ -20,7 +20,7 @@ services:
     command: npm run dev
     volumes:
       - ./:/usr/src/app/
-      - node_modules:/usr/src/app/node_modules
+      - dependencies:/usr/src/app/node_modules
     depends_on:
       - db
     environment:
@@ -30,4 +30,4 @@ services:
       - '3000:3000'
 volumes:
   psql:
-  node_modules:
+  dependencies:
