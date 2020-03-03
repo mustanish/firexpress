@@ -1,23 +1,23 @@
 {
-  "name": "buzz-khata-people",
+  "name": "express-server-rest-api",
   "version": "1.0.0",
   "description": "People module of buzzkhata",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "nodemon ./bin/www",
     "lint": "eslint ./ -c .eslintrc.js --ext js",
-    "start": "node server.js",
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mustanish/buzz-khata-people.git"
+    "url": "git+https://github.com/mustanish/express-server-rest-api.git"
   },
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/mustanish/buzz-khata-people/issues"
+    "url": "https://github.com/mustanish/express-server-rest-api/issues"
   },
-  "homepage": "https://github.com/mustanish/buzz-khata-people#readme",
+  "homepage": "https://github.com/mustanish/express-server-rest-api#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
     "app-root-path": "^3.0.0",

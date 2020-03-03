@@ -7,7 +7,8 @@ const logger = createLogger({
     env === 'development'
       ? new transports.Console(OPTIONS.console)
       : new transports.File(OPTIONS.file)
-  ]
+  ],
+  exitOnError: false
 });
 
 logger.stream = {
