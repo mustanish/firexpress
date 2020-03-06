@@ -1,16 +1,6 @@
-/* eslint-disable spaced-comment */
-/*const code = require('http-status-codes');
-const connector = require('../configs/database');
-const Group = require('../models/group');
-const GROUP_CONSTANT = require('../constants/group');*/
+const add = () => {};
 
-const add = () => {
-  console.log('INSIDE:', 'add');
-};
-
-const remove = () => {
-  console.log('INSIDE:', 'remove');
-};
+const remove = () => {};
 
 module.exports = {
   add,

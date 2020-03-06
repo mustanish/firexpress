@@ -1,6 +1,8 @@
 const _ = require('lodash');
+const HTTP_CODE = require('http-status-codes');
 const Joi = require('@hapi/joi');
 const schemas = require('../schemas');
+const GLOBAL_CONSTANT = require('../constants/global');
 
 module.exports = (useJoiError = false) => {
   const supportedMethods = ['post', 'put', 'patch', 'delete'];
@@ -22,8 +24,8 @@ module.exports = (useJoiError = false) => {
           Joi.assert(req.body, schema, validationOptions);
         } catch (err) {
           const errObj = {
-            status: 'failed',
-            error: 'Invalid request. Please review your request and try again.'
+            status: GLOBAL_CONSTANT.failed,
+            error: GLOBAL_CONSTANT.invalid
           };
           if (useJoiError) {
             errObj.error = {
@@ -33,7 +35,7 @@ module.exports = (useJoiError = false) => {
               })
             };
           }
-          res.status(400).json(errObj);
+          res.status(HTTP_CODE.BAD_REQUEST).json(errObj);
         }
       }
     }

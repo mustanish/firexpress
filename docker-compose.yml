@@ -24,8 +24,8 @@ services:
     depends_on:
       - db
     environment:
+      DATABASE_URL: 'postgresql://postgres:postgres@db:5432/buzzkhata'
       NODE_ENV: development
-      DATABASE_URL: 'postgresql://postgres:postgres@$db:5432/buzzkhata'
     ports:
       - '3000:3000'
 volumes:

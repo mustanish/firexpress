@@ -1,6 +1,4 @@
-const deepFreeze = require('deep-freeze');
-
-const members = {
+module.exports = {
   add: {
     query: {},
     messages: {
@@ -27,4 +25,3 @@ const members = {
     }
   }
 };
-module.exports = deepFreeze(members);

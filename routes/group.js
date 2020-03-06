@@ -6,6 +6,12 @@ const router = express.Router();
 
 router.post('/group', schemaValidator(true), group.create);
 
-router.put('/group/:id', schemaValidator(true), group.update);
+router.patch('/group/:id', schemaValidator(true), group.update);
+
+router.get('/group/', group.all);
+
+router.get('/group/:id', group.single);
+
+router.delete('/group/:id', group.remove);
 
 module.exports = router;
