@@ -1,12 +1,12 @@
 const deepFreeze = require('deep-freeze');
 const group = require('./group');
-const members = require('./members');
 
 const schema = {
-  '/group': group.create,
-  '/group/:id': group.update,
-  '/members': members.add,
-  '/member': members.remove
+  '/group:post': group.create,
+  '/group/:id:patch': group.update,
+  '/group/:id:delete': group.remove,
+  '/group/:id:get': group.single,
+  '/group:get': group.all
 };
 
 module.exports = deepFreeze(schema);

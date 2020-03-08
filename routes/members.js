@@ -1,11 +1,11 @@
 const express = require('express');
 const members = require('../controllers/members');
-const schemaValidator = require('../middlewares/schemaValidator');
+const validator = require('../middlewares/validator');
 
 const router = express.Router();
 
-router.post('/members', schemaValidator(true), members.add);
+router.post('/members', validator.body(true), members.add);
 
-router.delete('/member', schemaValidator(true), members.remove);
+router.delete('/member', validator.body(true), members.remove);
 
 module.exports = router;

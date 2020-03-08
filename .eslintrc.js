@@ -20,6 +20,7 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     'no-underscore-dangle': ['error', { allow: ['_original'] }],
     'no-unneeded-ternary': ['error'],
+    'no-unused-vars': ['error', { args: 'none' }],
     'object-curly-spacing': ['error', 'always'],
     'prefer-destructuring': ['error'],
     'prefer-object-spread': ['error'],

@@ -22,13 +22,15 @@ const routes = require('./routes');
 app.use('/', routes);
 
 // 404
-app.use((req, res) => {
-  res.status(404).send({ message: `Route${req.url} Not found.` });
+app.use((req, res, next) => {
+  const err = new Error(`Route${req.url} Not found.`);
+  err.status = 404;
+  next(err);
 });
 
 // Any server error
-app.use((err, req, res) => {
-  res.status(500).send({ error: err });
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).send(err.message);
 });
 
 module.exports = app;
