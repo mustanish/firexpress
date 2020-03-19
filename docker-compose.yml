@@ -12,6 +12,14 @@ services:
       POSTGRES_DB: buzzkhata
     ports:
       - '5432:5432'
+  cache:
+    image: 'redis:alpine'
+    container_name: cache
+    restart: unless-stopped
+    volumes:
+      - redis:/data
+    ports:
+      - '6379:6379'
   people:
     build: ./
     image: people
@@ -24,10 +32,12 @@ services:
     depends_on:
       - db
     environment:
+      CACAHE_URL: redis://cache
       DATABASE_URL: 'postgresql://postgres:postgres@db:5432/buzzkhata'
       NODE_ENV: development
     ports:
       - '3000:3000'
 volumes:
-  psql:
   dependencies:
+  psql:
+  redis:

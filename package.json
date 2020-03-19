@@ -1,5 +1,5 @@
 {
-  "name": "express-server-rest-api",
+  "name": "firexpress",
   "version": "1.0.0",
   "description": "People module of buzzkhata",
   "main": "app.js",
@@ -11,13 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mustanish/express-server-rest-api.git"
+    "url": "git+https://github.com/mustanish/firexpress.git"
   },
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/mustanish/express-server-rest-api/issues"
+    "url": "https://github.com/mustanish/firexpress/issues"
   },
-  "homepage": "https://github.com/mustanish/express-server-rest-api#readme",
+  "homepage": "https://github.com/mustanish/firexpress#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.0",
     "app-root-path": "^3.0.0",

@@ -7,10 +7,11 @@ class Group {
    *
    * @param {*} database
    */
-  constructor({ database }) {
+  constructor({ database, cache }) {
     if (!Group.instance) {
       Group.instance = this;
       this.database = database;
+      this.cache = cache;
     }
     return Group.instance;
   }
