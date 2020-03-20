@@ -1,6 +1,5 @@
 const connector = require('../connectors');
 const Group = require('../models/Group');
-const GROUP_CONSTANT = require('../constants/group');
 
 const model = new Group(connector);
 /**
@@ -10,13 +9,7 @@ const model = new Group(connector);
  */
 const create = async (req, res) => {
   const { name, members } = req.body;
-  const { code, data } = await model.create(
-    1,
-    name,
-    members,
-    GROUP_CONSTANT.create.query,
-    GROUP_CONSTANT.all.query
-  );
+  const { code, data } = await model.create(1, name, members);
   res.status(code).json(data);
 };
 
@@ -28,7 +21,7 @@ const create = async (req, res) => {
 const update = async (req, res) => {
   const { id } = req.params;
   const { name, desc } = req.body;
-  const { code, data } = await model.update(id, name, desc, GROUP_CONSTANT.update.query);
+  const { code, data } = await model.update(id, name, desc);
   res.status(code).json(data);
 };
 
@@ -39,11 +32,7 @@ const update = async (req, res) => {
  */
 const remove = async (req, res) => {
   const { id } = req.params;
-  const { code, data } = await model.remove(
-    id,
-    GROUP_CONSTANT.remove.query,
-    GROUP_CONSTANT.all.query
-  );
+  const { code, data } = await model.remove(id);
   res.status(code).json(data);
 };
 
@@ -52,9 +41,9 @@ const remove = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const single = async (req, res) => {
+const get = async (req, res) => {
   const { id } = req.params;
-  const { code, data } = await model.single(id, GROUP_CONSTANT.single.query);
+  const { code, data } = await model.get(id);
   res.status(code).json(data);
 };
 
@@ -63,17 +52,17 @@ const single = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const all = async (req, res) => {
+const getAll = async (req, res) => {
   const page = req.query.page || 1;
   const perPage = req.query.perPage || 10;
-  const { code, data } = await model.all(1, page, perPage, GROUP_CONSTANT.all.query);
+  const { code, data } = await model.getAll(1, page, perPage);
   res.status(code).json(data);
 };
 
 module.exports = {
-  all,
   create,
+  get,
+  getAll,
   remove,
-  single,
   update
 };

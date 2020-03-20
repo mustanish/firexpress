@@ -1,6 +1,7 @@
 const { BAD_REQUEST, OK } = require('http-status-codes');
 const { isArray, isEmpty } = require('lodash');
 const GLOBAL_CONSTANT = require('../constants');
+const GROUP_CONSTANT = require('../constants/group');
 
 class Group {
   /**
@@ -21,15 +22,15 @@ class Group {
    * @param {*} userId
    * @param {*} name
    * @param {*} members
-   * @param {*} createQuery
-   * @param {*} allQuery
    */
-  async create(userId, name, members, createQuery, allQuery) {
-    Object.assign(createQuery, { values: [name, userId, userId] });
-    const response = await this.database.execute(createQuery);
-    if (response.data.error) return response;
-    const allGroups = await this.all(userId, 1, 10, allQuery);
-    return { code: OK, data: { status: GLOBAL_CONSTANT.success, data: allGroups } };
+  async create(userId, name, members) {
+    const { create, all } = GROUP_CONSTANT;
+    Object.assign(create.query, { values: [name, userId, userId] });
+    let response = await this.database.execute(create.query);
+    if (response.data && response.data.error) return response;
+    response = await this.getAll(userId, 1, 10, all.query);
+    if (response.data && response.data.error) return response;
+    return { code: OK, data: { status: GLOBAL_CONSTANT.success, data: response.data.data } };
   }
 
   /**
@@ -37,48 +38,44 @@ class Group {
    * @param {*} groupId
    * @param {*} name
    * @param {*} desc
-   * @param {*} updateQuery
    */
-  async update(groupId, name, desc, updateQuery) {
-    Object.assign(updateQuery, { values: [name, desc, groupId] });
-    const response = await this.database.execute(updateQuery);
-    if (response.data.error) return response;
-    if (isArray(response) && isEmpty(response))
-      return {
-        code: BAD_REQUEST,
-        data: { status: GLOBAL_CONSTANT.failed, error: GLOBAL_CONSTANT.notfound }
-      };
-    return { code: BAD_REQUEST, data: { status: GLOBAL_CONSTANT.success, data: response } };
+  async update(groupId, name, desc) {
+    let response = await this.get(groupId);
+    if (response.data && response.data.error) return response;
+    const { update } = GROUP_CONSTANT;
+    Object.assign(update.query, {
+      values: [name || response.data.data[0].name, desc || response.data.data[0].desc, groupId]
+    });
+    response = await this.database.execute(update.query);
+    if (response.data && response.data.error) return response;
+    return { code: OK, data: { status: GLOBAL_CONSTANT.success, data: response } };
   }
 
   /**
    *
    * @param {*} groupId
-   * @param {*} deleteQuery
-   * @param {*} allQuery
    */
-  async remove(groupId, deleteQuery, allQuery) {
-    Object.assign(deleteQuery, { values: [true, groupId] });
-    const response = await this.database.execute(deleteQuery);
-    if (response.data.error) return response;
-    if (isArray(response) && isEmpty(response))
-      return {
-        code: BAD_REQUEST,
-        data: { status: GLOBAL_CONSTANT.failed, error: GLOBAL_CONSTANT.notfound }
-      };
-    const allGroups = await this.all(1, 1, 10, allQuery);
-    return { code: OK, data: { status: GLOBAL_CONSTANT.success, data: allGroups } };
+  async remove(groupId) {
+    let response = await this.get(groupId);
+    if (response.data && response.data.error) return response;
+    const { remove, all } = GROUP_CONSTANT;
+    Object.assign(remove.query, { values: [true, groupId] });
+    response = await this.database.execute(remove.query);
+    if (response.data && response.data.error) return response;
+    response = await this.getAll(1, 1, 10, all.query);
+    if (response.data && response.data.error) return response;
+    return { code: OK, data: { status: GLOBAL_CONSTANT.success, data: response.data.data } };
   }
 
   /**
    *
    * @param {*} groupId
-   * @param {*} singleQuery
    */
-  async single(groupId, singleQuery) {
-    Object.assign(singleQuery, { values: [groupId] });
-    const response = await this.database.execute(singleQuery);
-    if (response.data.error) return response;
+  async get(groupId) {
+    const { single } = GROUP_CONSTANT;
+    Object.assign(single.query, { values: [groupId] });
+    const response = await this.database.execute(single.query);
+    if (response.data && response.data.error) return response;
     if (isArray(response) && isEmpty(response))
       return {
         code: BAD_REQUEST,
@@ -92,12 +89,12 @@ class Group {
    * @param {*} userId
    * @param {*} page
    * @param {*} perPage
-   * @param {*} allQuery
    */
-  async all(userId, page, perPage, allQuery) {
-    Object.assign(allQuery, { values: [userId, perPage, (page - 1) * perPage] });
-    const response = await this.database.execute(allQuery);
-    if (response.data.error) return response;
+  async getAll(userId, page, perPage) {
+    const { all } = GROUP_CONSTANT;
+    Object.assign(all.query, { values: [userId, perPage, (page - 1) * perPage] });
+    const response = await this.database.execute(all.query);
+    if (response.data && response.data.error) return response;
     return { code: OK, data: { status: GLOBAL_CONSTANT.success, data: response } };
   }
 }

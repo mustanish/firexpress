@@ -17,7 +17,7 @@ const execute = async (query, next) => {
       data: { status: GLOBAL_CONSTANT.failed, error: err.message }
     };
   } finally {
-    client.end();
+    client.release();
   }
 };
 

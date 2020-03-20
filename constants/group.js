@@ -19,7 +19,8 @@ module.exports = {
   },
   update: {
     query: {
-      text: 'UPDATE groups SET name=$1, desc=$2 WHERE uuid= $3 RETURNING uuid'
+      text:
+        "UPDATE groups SET name=$1, description=$2 WHERE uuid= $3 RETURNING name, description AS desc, 'https://baseurl/' || uuid AS icon"
     },
     messages: {
       name: {
@@ -36,20 +37,19 @@ module.exports = {
   },
   remove: {
     query: {
-      text:
-        "UPDATE groups SET deleted=$1 WHERE uuid=$2 RETURNING name, 'https://baseurl/' || uuid AS icon"
+      text: 'UPDATE groups SET deleted=$1 WHERE uuid=$2 RETURNING uuid '
     }
   },
   single: {
     query: {
       text:
-        "SELECT name, 'https://baseurl/' || uuid AS icon FROM groups WHERE uuid=$1 AND deleted=FALSE"
+        "SELECT name, description AS desc, 'https://baseurl/' || uuid AS icon FROM groups WHERE uuid=$1 AND deleted=FALSE"
     }
   },
   all: {
     query: {
       text:
-        "SELECT name, 'https://baseurl/' || uuid AS icon FROM groups WHERE created_by=$1 AND deleted=FALSE ORDER BY name LIMIT $2 OFFSET $3"
+        "SELECT name, description AS desc, 'https://baseurl/' || uuid AS icon FROM groups WHERE created_by=$1 AND deleted=FALSE ORDER BY updated_at DESC LIMIT $2 OFFSET $3"
     },
     messages: {
       page: {

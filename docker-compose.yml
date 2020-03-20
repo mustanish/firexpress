@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: buzzkhata
+      POSTGRES_DB: postgres
     ports:
       - '5432:5432'
   cache:
@@ -33,7 +33,7 @@ services:
       - db
     environment:
       CACAHE_URL: redis://cache
-      DATABASE_URL: 'postgresql://postgres:postgres@db:5432/buzzkhata'
+      DATABASE_URL: 'postgresql://postgres:postgres@db:5432/postgres'
       NODE_ENV: development
     ports:
       - '3000:3000'

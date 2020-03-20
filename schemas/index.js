@@ -6,7 +6,7 @@ const schema = {
   '/group/:id:patch': group.update,
   '/group/:id:delete': group.remove,
   '/group/:id:get': group.single,
-  '/group:get': group.all
+  '/groups:get': group.all
 };
 
 module.exports = deepFreeze(schema);

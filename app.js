@@ -17,9 +17,8 @@ app.get('/', function(req, res) {
   res.send('Express Module With Docker Setup');
 });
 
-const routes = require('./routes');
-
-app.use('/', routes);
+// routes
+require('./routes/group')(app);
 
 // 404
 app.use((req, res, next) => {

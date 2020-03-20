@@ -5,6 +5,7 @@ CREATE TABLE groups
   uuid uuid DEFAULT gen_random_uuid(),
   name VARCHAR (15) NOT NULL,
   description TEXT,
+  deleted BOOLEAN NOT NULL DEFAULT FALSE,
   created_by bigint NOT NULL,
   updated_by bigint,
   deleted_by bigint,
